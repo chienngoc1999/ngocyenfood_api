@@ -1,10 +1,5 @@
 <?php
 
-use App\Models\Address;
-use App\Models\City;
-use App\Models\Prefecture;
-use App\Models\Region;
-use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('address', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('building')->nullable();
-            $table->string('address');
-            $table->string('prefecture')->nullable();
-            $table->string('region')->nullable();
-            $table->string('city')->nullable();
+            $table->string('type_code');
             $table->timestamps();
         });
     }
@@ -37,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('address');
+        Schema::dropIfExists('categories');
     }
 };

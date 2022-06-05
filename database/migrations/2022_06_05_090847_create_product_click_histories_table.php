@@ -1,9 +1,6 @@
 <?php
 
-use App\Models\Address;
-use App\Models\City;
-use App\Models\Prefecture;
-use App\Models\Region;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -18,14 +15,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('address', function (Blueprint $table) {
+        Schema::create('product_click_histories', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('building')->nullable();
-            $table->string('address');
-            $table->string('prefecture')->nullable();
-            $table->string('region')->nullable();
-            $table->string('city')->nullable();
+            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(Product::class);
+            $table->float('amount')->default(0);
+            $table->string('payment_status_code');
             $table->timestamps();
         });
     }
@@ -37,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('address');
+        Schema::dropIfExists('product_click_histories');
     }
 };
